@@ -38,8 +38,8 @@
       <ul>
         @foreach($questions as $question)
           <li>
-            {{{ Str::limit($question->question, 35) }}} 
-            by {{ $question->user->username }}
+            {{ link_to_route('question', Str::limit($question->question, 35), array($question->id))  }} 
+            by {{ ucfirst($question->user->username) }}
           </li>
         @endforeach
       </ul>  
