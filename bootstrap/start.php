@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead'),
+	'local' => array('homestead', 'gayan-HP-ENVY-15-Notebook-PC'),
 
 ));
 
