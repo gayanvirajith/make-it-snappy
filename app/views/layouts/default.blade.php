@@ -11,14 +11,13 @@
   <div id="container">
     
     <div id="header">
-      {{ HTML::link('/', 'Make It Snappy Q&A' )}}  
+      {{ link_to_route('home', 'Make It Snappy Q&A' )}}  
     </div> <!-- end header -->
 
     <div id="nav">
       <ul>
-        <li>{{ HTML::link('/', 'Home')}}</li>
-        <li>{{ HTML::link('/', 'Register')}}</li>
-        <li>{{ HTML::link('/', 'Login')}}</li>
+        <li>{{ link_to_route('home', 'Home')}}</li>
+        <li>{{ link_to_route('register', 'Register')}}</li>
       </ul>
     </div><!-- end nav -->
 

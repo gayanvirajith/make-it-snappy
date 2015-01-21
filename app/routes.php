@@ -12,3 +12,7 @@
 */
 
 Route::get('/', array('uses' => 'QuestionsController@index', 'as' => 'home'));
+Route::get('register', array('uses' => 'UsersController@create', 'as' => 'register'));
+
+
+Route::post('users', array('uses' => 'UsersController@store', 'as' => 'users'));
