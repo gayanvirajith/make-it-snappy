@@ -38,11 +38,46 @@ class UsersController extends \BaseController {
 				'password' => Hash::make(Input::get('password'))
 			));
 
+			$user = User::whereUsername(Input::get('username'))->first();
+
+			Auth::login($user);
+
 			return Redirect::route('home')
-				->withMessage('Thanks for registering!');
+				->withMessage('Thanks for registering. You are now logged in!');
 		} else {
 			return Redirect::route('register')->withErrors($validation)->withInput();
 		}
 	}
 
+
+	public function login() {
+		return View::make('users.login')
+			->withTitle('Make It Snappy Q&A - Login');
+	}
+
+	public function auth() {
+
+		$user = array(
+			'username' => Input::get('username'),
+			'password' => Input::get('password')
+		);
+
+		if ( Auth::attempt($user) ) {
+			return Redirect::route('home')->withMessage('You are logged in!');
+		} else {
+			return Redirect::route('login')
+				->withMessage('Your username/password combination was incorrect!')
+				->withInput();
+		}
+	}
+
+	public function logout() {
+
+		if ( Auth::check()) {
+			Auth::logout();
+			return Redirect::route('login')->withMessage('You are now logged out!');
+		}else {
+			return Redirect::route('home');
+		}
+	}
 }

@@ -11,13 +11,18 @@
   <div id="container">
     
     <div id="header">
-      {{ link_to_route('home', 'Make It Snappy Q&A' )}}  
+      {{ link_to_route('home', Lang::get('messages.appName') )}}  
     </div> <!-- end header -->
 
     <div id="nav">
       <ul>
         <li>{{ link_to_route('home', 'Home')}}</li>
-        <li>{{ link_to_route('register', 'Register')}}</li>
+        @if (!Auth::check() )
+          <li>{{ link_to_route('register', Lang::get('messages.register'))}}</li>
+          <li>{{ link_to_route('login', Lang::get('messages.login'))}}</li>
+        @else 
+          <li>{{ link_to_route('logout', Lang::get('messages.logout', array('name' => Auth::user()->username ))) }}</li>
+        @endif
       </ul>
     </div><!-- end nav -->
 
@@ -31,7 +36,7 @@
     </div><!-- content -->
 
     <div id="footer">
-      &copy; Make It Snappy Q&A {{{ date('Y') }}}.
+      &copy; {{{ Lang::get('messages.appName') }}} {{{ date('Y') }}}.
     </div>
 
   </div> <!-- end container -->

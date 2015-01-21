@@ -242,7 +242,7 @@ a:hover, a:active {
   margin-top: 20px;
 }
 
-.pagination ul li {
+.pagination li {
   margin: 0 2px;
   display: inline;
 }
