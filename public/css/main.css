@@ -161,9 +161,10 @@ a:hover, a:active {
   clear: both;
   padding: 18px;
   background-color: #fff;
-  border-left: 1px solid #1144AA;
-  border-right: 1px solid #1144AA;
+  border-left: 1px solid #C9D9F9;
+  border-right: 1px solid #C9D9F9;
   overflow: hidden;
+  min-height: 400px;
 }
 
 #content ul {
