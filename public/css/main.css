@@ -164,7 +164,6 @@ a:hover, a:active {
   border-left: 1px solid #C9D9F9;
   border-right: 1px solid #C9D9F9;
   overflow: hidden;
-  min-height: 400px;
 }
 
 #content ul {
