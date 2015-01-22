@@ -96,6 +96,33 @@ class QuestionsController extends \BaseController {
 				->withInput();
 		}
 	}
+
+	/**
+	 * Submit search keywords here.
+	 * POST /search
+	 *
+	 * @return Response
+	 */
+	public function search() {
+
+		$keyword = Input::get('keyword');
+
+		if (empty($keyword)) {
+			return Redirect::route('home')
+				->withMessage('No keyword entered, please try again');
+		}
+
+		return Redirect::route('searchResult', $keyword);
+	}
+
+
+	public function searchResult($keyword) {
+
+		return View::make('questions.results')
+			->withTitle(Lang::get('messages.appName') . ' - Search Results')
+			->withQuestions(Question::search($keyword))
+			->withKeyword($keyword);
+	}
   
 	private function findQuestion($id) {
 		return Question::find($id);

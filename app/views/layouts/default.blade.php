@@ -11,7 +11,14 @@
   <div id="container">
     
     <div id="header">
-      {{ link_to_route('home', Lang::get('messages.appName') )}}  
+      {{ link_to_route('home', Lang::get('messages.appName') ) }}
+      <div id="searchbar">
+        {{ Form::open(array('route' => 'search')) }}
+          <?php $keyword = (isset($keyword))? $keyword : "" ?>
+          {{ Form::text('keyword', isset($keyword) ? $keyword : '', array('placeholder' => 'Search')) }}
+          {{ Form::submit('Search') }}
+        {{ Form::close() }}
+      </div>    
     </div> <!-- end header -->
 
     <div id="nav">

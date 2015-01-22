@@ -11,7 +11,7 @@ return array(
   |
   */
 
-  'appName' => 'Make It Snappy Q & A',
+  'appName' => 'Make It Snappy Q&A',
   'logout' => 'Logout (:name)',
   'home'=> 'Home',
   'register' => 'Register',

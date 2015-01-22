@@ -34,6 +34,8 @@ Route::get('question/edit/{id}',
     'uses' => 'QuestionsController@edit', 
     'as' => 'editQuestion'
 ));
+Route::get('results/{keyword}', 
+  array('uses' => 'QuestionsController@searchResult', 'as' => 'searchResult'));
 
 
 
@@ -46,12 +48,10 @@ Route::post('ask',
   array('before' => 'auth', 'uses' => 'QuestionsController@create', 'as' => 'ask'));
 Route::post('answer', 
   array('before' => 'auth', 'uses' => 'AnswersController@store', 'as' => 'answer'));
+Route::post('search', 
+  array('uses' => 'QuestionsController@search', 'as' => 'search'));
 
 //PUT methods
 Route::put('question/update/{id}', 
   array('before' => 'auth', 'uses' => 'QuestionsController@update', 'as' => 'updateQuestion'));
 
-
-// Event::listen('illuminate.query', function($query){
-//   var_dump($query);
-// });

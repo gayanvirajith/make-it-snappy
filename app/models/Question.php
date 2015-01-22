@@ -30,4 +30,10 @@ class Question extends BaseModel {
       ->where('user_id', '=', Auth::user()->id)
       ->paginate(3);
   }
+
+  public static function search($keyword) {
+    return Question::with('user')
+      ->where('question', 'LIKE', '%' . $keyword . '%')
+      ->paginate(3);
+  }
 }
