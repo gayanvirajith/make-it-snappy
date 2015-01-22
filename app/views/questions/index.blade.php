@@ -39,7 +39,8 @@
         @foreach($questions as $question)
           <li>
             {{ link_to_route('question', Str::limit($question->question, 35), array($question->id))  }} 
-            by {{ ucfirst($question->user->username) }}
+            by {{ ucfirst($question->user->username) }} 
+            {{ count($question->answers) }} {{ Str::plural('Answer', count($question->answers)) }}
           </li>
         @endforeach
       </ul>  

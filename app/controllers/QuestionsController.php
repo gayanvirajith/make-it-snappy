@@ -51,7 +51,7 @@ class QuestionsController extends \BaseController {
 	public function question($id = null) {
 		return View::make('questions.view')
 			->withTitle(Lang::get('messages.appName') . '- View Question')
-			->withQuestion(Question::with('user')->where('id', '=', $id)->first());
+			->withQuestion(Question::with(array('user', 'answers.user'))->where('id', '=', $id)->first());
 	}
 
 	public function yourQuestions() {

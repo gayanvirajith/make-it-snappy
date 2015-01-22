@@ -34,4 +34,8 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	public function questions() {
 		return $this->hasMany('Question');
 	}
+
+	public function answers() {
+		return $this->hasMany('Answer');
+	}
 }

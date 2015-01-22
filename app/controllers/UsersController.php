@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
 			'password' => Input::get('password')
 		);
 
-		if ( Auth::attempt($user) ) {
+		if ( Auth::attempt($user, true) ) {
 			return Redirect::route('home')->withMessage('You are logged in!');
 		} else {
 			return Redirect::route('login')

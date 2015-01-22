@@ -44,6 +44,8 @@ Route::post('auth',
   array('uses' => 'UsersController@auth', 'as' => 'auth'));
 Route::post('ask', 
   array('before' => 'auth', 'uses' => 'QuestionsController@create', 'as' => 'ask'));
+Route::post('answer', 
+  array('before' => 'auth', 'uses' => 'AnswersController@store', 'as' => 'answer'));
 
 //PUT methods
 Route::put('question/update/{id}', 

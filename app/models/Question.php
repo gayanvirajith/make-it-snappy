@@ -13,16 +13,20 @@ class Question extends BaseModel {
     return $this->belongsTo('User');
   }
 
+  public function answers() {
+    return $this->hasMany('Answer');
+  }
+
   public static function unsolved() {
 
-    return Question::with('user')
+    return Question::with(array('user', 'answers'))
       ->where('solved', '=', 0)
       ->orderBy('id', 'DESC')
       ->paginate(3);
   }
 
   public static function yourQuestions() {
-    return Question::with('user')
+    return Question::with(array('user', 'answers'))
       ->where('user_id', '=', Auth::user()->id)
       ->paginate(3);
   }
