@@ -11,6 +11,7 @@
 |
 */
 
+//Get Routes
 Route::get('/', 
   array('uses' => 'QuestionsController@index', 'as' => 'home'));
 Route::get('register', 
@@ -27,11 +28,26 @@ Route::get('your-questions',
     'uses' => 'QuestionsController@yourQuestions', 
     'as' => 'yourQuestions'
 ));
+Route::get('question/edit/{id}', 
+  array(
+    'before' => 'auth', 
+    'uses' => 'QuestionsController@edit', 
+    'as' => 'editQuestion'
+));
 
 
-Route::post('users', array('uses' => 'UsersController@store', 'as' => 'users'));
-Route::post('auth', array('uses' => 'UsersController@auth', 'as' => 'auth'));
-Route::post('ask', array('before' => 'auth', 'uses' => 'QuestionsController@create', 'as' => 'ask'));
+
+//POST Routes
+Route::post('users', 
+  array('uses' => 'UsersController@store', 'as' => 'users'));
+Route::post('auth', 
+  array('uses' => 'UsersController@auth', 'as' => 'auth'));
+Route::post('ask', 
+  array('before' => 'auth', 'uses' => 'QuestionsController@create', 'as' => 'ask'));
+
+//PUT methods
+Route::put('question/update/{id}', 
+  array('before' => 'auth', 'uses' => 'QuestionsController@update', 'as' => 'updateQuestion'));
 
 
 // Event::listen('illuminate.query', function($query){

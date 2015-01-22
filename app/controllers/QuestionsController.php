@@ -6,7 +6,7 @@ class QuestionsController extends \BaseController {
 	 * Enable csrf authenticity on post
 	 */
 	public function __construct() {
-		$this->beforeFilter('csrf', array('on' => ['post']));
+		$this->beforeFilter('csrf', array('on' => ['post', 'put']));
 	}
 
 	/**
@@ -56,9 +56,58 @@ class QuestionsController extends \BaseController {
 
 	public function yourQuestions() {
 		return View::make('questions.your-questions')
-			->withTitle(Lang::get('messages.appName'))
+			->withTitle(Lang::get('messages.appName') . ' - Your Q\'s')
 			->withUsername(Auth::user()->username)
 			->withQuestions(Question::yourQuestions());
 	}
 
+	public function edit($id = null) {
+		$question = $this->findQuestion($id);
+		if (!$this->questionBelongsToUser($id)){
+			return Redirect::route('yourQuestions')
+							->withMessage('Invalid Question');
+		}
+		return View::make('questions.edit')
+				->withTitle(Lang::get('messages.appName') . ' - Edit')
+				->withQuestion($question);
+	}
+
+	public function update($id) {
+
+		$question = $this->findQuestion($id);
+		
+		if (!$this->questionBelongsToUser($id)){
+			return Redirect::route('yourQuestions')
+							->withMessage('Invalid Question');
+		}
+
+		$validator = Question::validate(Input::all());
+
+		if ($validator->passes()) {
+			$question->question = Input::get('question');
+			$question->solved = Input::get('solved');
+			$question->update();
+
+			return Redirect::route('question', $id)
+				->withMessage('Your Question has been updated!');
+		} else {
+			return Redirect::route('editQuestion', $id)
+				->withErrors($validator)
+				->withInput();
+		}
+	}
+  
+	private function findQuestion($id) {
+		return Question::find($id);
+	}
+
+	private function questionBelongsToUser($id) {
+		$question = $this->findQuestion($id);
+
+		if ($question->user_id == Auth::user()->id) {
+			return true;
+		}
+
+		return false;
+	}
 }
