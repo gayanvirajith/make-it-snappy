@@ -11,12 +11,22 @@
 |
 */
 
-Route::get('/', array('uses' => 'QuestionsController@index', 'as' => 'home'));
-Route::get('register', array('uses' => 'UsersController@create', 'as' => 'register'));
-Route::get('login', array('uses' => 'UsersController@login', 'as' => 'login'));
-Route::get('logout', array('uses' => 'UsersController@logout', 'as' => 'logout'));
+Route::get('/', 
+  array('uses' => 'QuestionsController@index', 'as' => 'home'));
+Route::get('register', 
+  array('uses' => 'UsersController@create', 'as' => 'register'));
+Route::get('login', 
+  array('uses' => 'UsersController@login', 'as' => 'login'));
+Route::get('logout', 
+  array('uses' => 'UsersController@logout', 'as' => 'logout'));
 Route::get('question/{id}', 
   array('uses' => 'QuestionsController@question', 'as' => 'question'));
+Route::get('your-questions', 
+  array(
+    'before' => 'auth', 
+    'uses' => 'QuestionsController@yourQuestions', 
+    'as' => 'yourQuestions'
+));
 
 
 Route::post('users', array('uses' => 'UsersController@store', 'as' => 'users'));

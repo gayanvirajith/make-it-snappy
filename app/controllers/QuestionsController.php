@@ -54,4 +54,11 @@ class QuestionsController extends \BaseController {
 			->withQuestion(Question::with('user')->where('id', '=', $id)->first());
 	}
 
+	public function yourQuestions() {
+		return View::make('questions.your-questions')
+			->withTitle(Lang::get('messages.appName'))
+			->withUsername(Auth::user()->username)
+			->withQuestions(Question::yourQuestions());
+	}
+
 }

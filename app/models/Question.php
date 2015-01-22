@@ -20,4 +20,10 @@ class Question extends BaseModel {
       ->orderBy('id', 'DESC')
       ->paginate(3);
   }
+
+  public static function yourQuestions() {
+    return Question::with('user')
+      ->where('user_id', '=', Auth::user()->id)
+      ->paginate(3);
+  }
 }

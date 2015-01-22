@@ -21,6 +21,9 @@
           <li>{{ link_to_route('register', Lang::get('messages.register'))}}</li>
           <li>{{ link_to_route('login', Lang::get('messages.login'))}}</li>
         @else 
+          <li>
+            {{ link_to_route('yourQuestions', 'Your Q\'s')}}
+          </li>
           <li>{{ link_to_route('logout', Lang::get('messages.logout', array('name' => Auth::user()->username ))) }}</li>
         @endif
       </ul>
